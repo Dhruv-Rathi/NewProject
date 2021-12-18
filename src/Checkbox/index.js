@@ -82,7 +82,7 @@ const SearchRenderer = ({query, onSearch, cancelSearch}) => {
           onPress={() => {
             cancelSearch();
           }}>
-          <XIcon style={{width: 5, height: 5}} />
+          {/* <XIcon style={{width: 5, height: 5}} /> */}
         </Text>
       </Text>
     </View>

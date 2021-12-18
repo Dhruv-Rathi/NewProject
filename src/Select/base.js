@@ -1,13 +1,13 @@
 import React from 'react';
 import useSearchSelect from '../useSearchSelect';
-import {View, Text} from 'react-native';
+import {View, Text, Pressable} from 'react-native';
 import ArrowDownIcon from '../../assets/downArrow';
 import useOutsideClicker from '../useOutsideClicker';
 const LabelCloseComponent = () => {
-  return 'Close';
+  return <Text>Close</Text>;
 };
 const LabelClearComponent = () => {
-  return 'Clear';
+  return <Text>Clear</Text>;
 };
 
 const NoDataComponent = () => {
@@ -75,31 +75,37 @@ const Index = ({
       )}
       {selected.length > 0 && !open && (
         <View>
-          <Text onPress={() => setSelected([])}>
+          <Pressable onPress={() => setSelected([])}>
             {props.clearText || <LabelClearComponent />}
-          </Text>
+          </Pressable>
         </View>
       )}
       {open && (
         <View>
-          <Text onPress={() => setOpen(false)}>
+          <Pressable onPress={() => setOpen(false)}>
             {props.closeComponent || <LabelCloseComponent />}
-          </Text>
+          </Pressable>
         </View>
       )}
 
       <View>
         {open === false && (
-          <View onPress={() => setOpen(true)} style={{flexDirection: 'row'}}>
-            <Text>
+          <Pressable
+            onPress={() => setOpen(true)}
+            style={{flexDirection: 'row'}}>
+            <Text style={{flex: 5}}>
               <SelectedDataRenderer selected={selected} />
             </Text>
             {props.suffixIcon || (
-              <View>
+              <View
+                style={{
+                  justifyContent: 'flex-end',
+                  alignItems: 'flex-end',
+                }}>
                 <ArrowDownIcon />
               </View>
             )}
-          </View>
+          </Pressable>
         )}
         {open === false && errorText !== '' && <Text>{errorText}</Text>}
         {open === true && (
@@ -108,6 +114,7 @@ const Index = ({
               query={query}
               onSearch={v => {
                 setQuery(v);
+                // console.log('abcdef', v);
               }}
               cancelSearch={() => setOpen(false)}
             />
@@ -115,13 +122,13 @@ const Index = ({
               {options.length > 0 && (
                 <>
                   {options.map(option => (
-                    <View
+                    <Pressable
                       onPress={() => {
                         addOrRemove(multiple, option);
                       }}
                       key={`options${option.value}`}>
                       <OptionsRenderer value={option} selected={selected} />
-                    </View>
+                    </Pressable>
                   ))}
                 </>
               )}

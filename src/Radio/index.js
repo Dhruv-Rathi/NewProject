@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState, useEffect} from 'react';
-import {View, TextInput, Text, TouchableOpacity} from 'react-native';
+import {View, TextInput, Text, TouchableOpacity, Pressable} from 'react-native';
 import CheckBox from './base';
 import CheckIcon from '../../assets/check';
 
@@ -26,10 +26,12 @@ const OptionsRenderer = ({value, selected, props}) => {
 
   return (
     <View style={{flexDirection: 'row'}}>
-      <TouchableOpacity
+      <View
         id={value.value}
         name={props.name}
-        onChange={() => {}}
+        onChange={() => {
+          setFound(true);
+        }}
         // onPress={setFound(true)}
         style={{
           borderColor: '#000',

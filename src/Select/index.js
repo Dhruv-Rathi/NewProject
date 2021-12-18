@@ -1,5 +1,12 @@
 import {useState, useEffect} from 'react';
-import {View, TextInput, Text, TouchableOpacity, Image} from 'react-native';
+import {
+  View,
+  TextInput,
+  Text,
+  TouchableOpacity,
+  Image,
+  Pressable,
+} from 'react-native';
 import React from 'react';
 import SelectBase from './base';
 import CrossIcon from '../../assets/cross';
@@ -24,7 +31,7 @@ const OptionsRenderer = ({value, selected}) => {
   }, [selected, value.value]);
 
   return (
-    <TouchableOpacity>
+    <View style={{flexDirection: 'row'}}>
       <View>
         {value.avatar && (
           <Image
@@ -40,26 +47,31 @@ const OptionsRenderer = ({value, selected}) => {
           <CheckIcon />
         </View>
       )}
-    </TouchableOpacity>
+    </View>
   );
 };
 
-const SearchRenderer = ({query, onSearch, cancelSearch}) => {
+const SearchRenderer = ({query = '', onSearch, cancelSearch}) => {
   return (
-    <View>
-      <TextInput
-        defaultValue={query}
-        placeholder="Type something ..."
-        onChange={e => {
-          onSearch(e);
-        }}
-      />
-      <View
-        style={{position: 'absolute'}}
-        onPress={() => {
-          cancelSearch();
-        }}>
-        <CrossIcon style={{width: 5, height: 5}} />
+    <View style={{flexDirection: 'row', alignItems: 'center'}}>
+      <View style={{flex: 5, justifyContent: 'flex-start'}}>
+        <TextInput
+          defaultValue={query}
+          placeholder="Type something ..."
+          onChange={e => {
+            onSearch(e);
+            console.log(query, typeof query);
+          }}
+        />
+      </View>
+      <View style={{justifyContent: 'flex-end'}}>
+        <Pressable
+          style={{position: 'absolute'}}
+          onPress={() => {
+            cancelSearch();
+          }}>
+          <CrossIcon style={{width: 5, height: 5}} />
+        </Pressable>
       </View>
     </View>
   );
