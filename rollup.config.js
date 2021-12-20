@@ -6,8 +6,8 @@ export default {
   input: [
     'src/index.js',
     'src/Checkbox/index.js',
-    // 'src/Radio/index.js',
-    // 'src/Select/index.js',
+    'src/Radio/index.js',
+    'src/Select/index.js',
   ],
   output: [
     {
